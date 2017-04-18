@@ -26,6 +26,7 @@ typedef void (*EmitSound2Fn) (void*, IRecipientFilter&, int, int, const char*, u
 typedef void (*RenderSmokePostViewmodelFn) (void*);
 typedef void (*OverrideViewFn) (void*, CViewSetup*);
 typedef float (*GetViewModelFOVFn) (void*);
+typedef bool (*WriteUserCmdDeltaToBufferFn)(void*, int, void*, int, int, bool);
 
 namespace Hooks
 {
@@ -49,6 +50,7 @@ namespace Hooks
 	void EmitSound2(void* thisptr, IRecipientFilter& filter, int iEntIndex, int iChannel, const char* pSoundEntry, unsigned int nSoundEntryHash, const char *pSample, float flVolume, int nSeed, soundlevel_t iSoundLevel, int iFlags, int iPitch, const Vector* pOrigin, const Vector* pDirection, void* pUtlVecOrigins, bool bUpdatePositions, float soundtime, int speakerentity);
 	void RenderSmokePostViewmodel(void* thisptr);
 	float GetViewModelFOV(void* thisptr);
+	bool WriteUserCmdDeltaToBuffer(void *thisptr, int slot, void *buf, int from, int to, bool isnewcommand);
 }
 
 namespace CreateMove

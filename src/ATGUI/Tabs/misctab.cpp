@@ -403,6 +403,8 @@ void Misc::RenderTab()
 			ImGui::Separator();
 			ImGui::Columns(2, NULL, true);
 			{
+				ImGui::Checkbox("drPepper", &Settings::FakeLag::drPepper);
+				SetTooltip("drPepper lag exploit");
 				ImGui::Checkbox("Fake Lag", &Settings::FakeLag::enabled);
 				SetTooltip("Chokes packets so it appears you're lagging");
 				ImGui::Checkbox("Adaptive Fake Lag", &Settings::FakeLag::adaptive);

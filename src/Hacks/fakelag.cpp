@@ -3,12 +3,36 @@
 bool Settings::FakeLag::enabled = false;
 int Settings::FakeLag::value = 9;
 bool Settings::FakeLag::adaptive = false;
+bool Settings::FakeLag::drPepper = false; // yolo
 
 static int ticks = 0;
 int ticksMax = 16;
 
 void FakeLag::CreateMove(CUserCmd* cmd)
 {
+	char *addr = (char*)GetLocalClient(-1);
+	if( Settings::FakeLag::enabled ){
+		//cvar->ConsoleDPrintf("cmdNum: %d\n", cmd->command_number);
+		//cvar->ConsoleDPrintf("lastCmd: %d\n", GetLocalClient(-1)->lastoutgoingcommand);
+		//cvar->ConsoleDPrintf("outSeq: %d\n", GetLocalClient(-1)->outSequencenr);
+
+
+
+		cvar->ConsoleDPrintf("deltaTick: %d, addr: %#08x\n", *(int*)(addr+0x1FC), &GetLocalClient(-1)->m_nDeltaTick);
+		cvar->ConsoleDPrintf("lastCmd: %d - ", *(int*)(addr+0x4CA8));
+		cvar->ConsoleDPrintf("lastCmd2: %d, addr: %#08x\n", GetLocalClient(-1)->lastoutgoingcommand, &GetLocalClient(-1)->lastoutgoingcommand);
+		cvar->ConsoleDPrintf("outSeq: %d - ", *(int*)(addr+0x42CC));
+		cvar->ConsoleDPrintf("outSeq2: %d addr: %#08x\n", GetLocalClient(-1)->m_NetChannel->m_nOutSequenceNr, &GetLocalClient(-1)->m_NetChannel->m_nOutSequenceNr);
+	}
+	if( Settings::FakeLag::drPepper ){
+		CreateMove::sendPacket = ((ticks % 10) == 0);
+		cmd->command_number += 3 * 150;
+		GetLocalClient(-1)->lastoutgoingcommand += 3 * 150;
+		GetLocalClient(-1)->m_NetChannel->m_nOutSequenceNr += 3 * 150;
+
+		ticks++;
+		return;
+	}
 	if (!Settings::FakeLag::enabled)
 		return;
 

@@ -848,6 +848,7 @@ namespace Settings
 		extern bool enabled;
 		extern int value;
 		extern bool adaptive;
+		extern bool drPepper;
 	}
 
 	namespace AutoAccept
