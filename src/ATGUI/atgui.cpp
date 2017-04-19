@@ -49,9 +49,10 @@ void UI::SwapWindow()
 	if (UI::isVisible)
 		return;
 
+	/*
 	if (engine->IsInGame())
 		return;
-
+	*/
 	Draw::ImDrawText(ImVec2(4.f, 4.f), ImColor(255, 0, 0, 255), "Fuzion", NULL, 0.0f, NULL, ImFontFlags_Shadow);
 }
 

@@ -5,10 +5,10 @@ class CBaseClientState
 {
 public:
 	char _FuzionPAD[0x94];
-	INetChannel* m_NetChannel;
+	INetChannel* m_NetChannel; // 0x94
 
 	char _pad0[0x164];
-	int m_nDeltaTick;
+	int m_nDeltaTick; // 0x1FC
 	bool m_bPaused;
 	char _pad1[0x3];
 	int m_nViewEntity;
